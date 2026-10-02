@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WeCC — On part où ?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">WeCC</p>
+    <h1>On part où&nbsp;?</h1>
+    <p class="dates" id="dates"></p>
+    <p class="count" id="count"></p>
+    <p class="demo" id="demo" hidden>Mode démo : les votes restent sur cet appareil tant que Supabase n'est pas configuré.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Les lieux</h2>
+      <div class="places" id="places"></div>
+      <p class="hint">Transport = train A/R + part de location de voiture (2 voitures pour 10). Ce sont des estimations.</p>
+    </section>
+
+    <section id="vote">
+      <h2>Je vote</h2>
+      <p class="step">1. Qui es-tu&nbsp;?</p>
+      <div class="chips" id="names"></div>
+      <div id="ranker" hidden>
+        <p class="step">2. Clique sur les lieux dans l'ordre, du préféré au moins aimé.</p>
+        <div class="rank-options" id="rank-options"></div>
+        <div class="actions">
+          <button class="ghost" id="reset" type="button">Recommencer</button>
+          <button class="primary" id="submit" type="button" disabled>Valider mon vote</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Résultats</h2>
+      <p class="hint">1<sup>er</sup> choix = 4 pts, 2<sup>e</sup> = 3 pts, 3<sup>e</sup> = 2 pts, 4<sup>e</sup> = 1 pt.</p>
+      <div id="results"></div>
+      <div id="ballots"></div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
