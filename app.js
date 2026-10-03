@@ -1,6 +1,7 @@
 const $ = (id) => document.getElementById(id);
 const euro = (n) => `${Math.round(n).toLocaleString("fr-FR")} €`;
-const people = TRIP.participants.length;
+const people = TRIP.headcount;
+const voters = TRIP.participants.length;
 const placeById = Object.fromEntries(PLACES.map((p) => [p.id, p]));
 
 let votes = [];
@@ -12,7 +13,8 @@ let ranking = [];
 function renderPlaces() {
   $("places").innerHTML = PLACES.map((p) => {
     const lodging = p.lodgingTotal / people;
-    const transport = p.trainPerPerson + CAR_PER_PERSON;
+    const train = p.trainOut.price + p.trainBack.price;
+    const transport = train + CAR_PER_PERSON;
     return `
       <article class="card">
         <div class="carousel" data-place="${p.id}" data-index="0">
@@ -27,8 +29,10 @@ function renderPlaces() {
           <p class="listing">${p.listing}</p>
           <p class="specs">${p.specs}</p>
           <dl>
-            <div><dt>Depuis Paris</dt><dd>${p.travelTime}<small>${p.travelDetail}</small></dd></div>
-            <div><dt>Transport</dt><dd>${euro(transport)} / pers<small>train ${euro(p.trainPerPerson)} + voiture ${euro(CAR_PER_PERSON)}</small></dd></div>
+            <div><dt>Depuis Paris</dt><dd>${p.travelTime}<small>train + ${p.drive}</small></dd></div>
+            <div><dt>Aller</dt><dd>${euro(p.trainOut.price)}<small>${p.trainOut.label}</small></dd></div>
+            <div><dt>Retour</dt><dd>${euro(p.trainBack.price)}<small>${p.trainBack.label}</small></dd></div>
+            <div><dt>Transport</dt><dd>${euro(transport)} / pers<small>train ${euro(train)} + voiture ${euro(CAR_PER_PERSON)}</small></dd></div>
             <div><dt>Logement</dt><dd>${euro(lodging)} / pers<small>${euro(p.lodgingTotal)} au total — ${p.lodgingNote}</small></dd></div>
             <div class="total"><dt>Total estimé</dt><dd>${euro(lodging + transport)} / pers</dd></div>
           </dl>
@@ -112,7 +116,7 @@ $("submit").addEventListener("click", async () => {
 // --- Résultats ---
 
 function renderResults() {
-  $("count").textContent = `${votes.length} / ${people} ont voté`;
+  $("count").textContent = `${votes.length} / ${voters} ont voté`;
 
   const scores = PLACES.map((p) => {
     const points = votes.reduce((sum, v) => {
@@ -141,7 +145,8 @@ function renderResults() {
 async function refresh() {
   try {
     const known = new Set(TRIP.participants);
-    votes = (await Store.list()).filter((v) => known.has(v.name));
+    // Ignore les votes portant sur une ancienne liste de lieux
+    votes = (await Store.list()).filter((v) => known.has(v.name) && v.ranking.every((id) => placeById[id]));
   } catch (err) {
     $("status").textContent = err.message;
   }
