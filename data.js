@@ -7,7 +7,7 @@ const TRIP = {
   dates: "6 → 11 novembre 2026",
   nights: 5,
   headcount: 12, // nombre de personnes pour diviser les prix
-  participants: ["Fef", "Romain", "Mathos", "Ben", "Fanny", "Eline", "Nathan", "Bastien", "duch", "CamDuch"],
+  participants: ["Fef", "Romain", "Mathos", "Ben", "Fanny", "Eline", "Nathan", "Bastien", "duch", "CamDuch", "VQ", "Berth"],
 };
 
 // Location de voiture : 3 voitures × ~300 € sur 5 jours + ~90 € de carburant/péages, divisé par 12 (estimation)
