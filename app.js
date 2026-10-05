@@ -1,6 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const euro = (n) => `${Math.round(n).toLocaleString("fr-FR")} €`;
-const people = TRIP.headcount;
+const people = TRIP.participants.length;
 const voters = TRIP.participants.length;
 const placeById = Object.fromEntries(PLACES.map((p) => [p.id, p]));
 

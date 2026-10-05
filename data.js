@@ -1,13 +1,12 @@
 // Données du séjour — tout est modifiable ici.
-// Prix logement relevés sur les annonces le 04/10/2026 pour 12 personnes.
+// Prix logement relevés sur les annonces le 04/10/2026 (totaux du séjour).
 // Trains relevés sur SNCF Connect le 04/10/2026 : prix « dès », pour 1 personne, susceptibles de monter.
 
 const TRIP = {
   title: "Vacs entre potes",
   dates: "6 → 11 novembre 2026",
   nights: 5,
-  headcount: 12, // nombre de personnes pour diviser les prix
-  participants: ["Fef", "Romain", "Mathos", "Ben", "Fanny", "Eline", "Nathan", "Bastien", "duch", "CamDuch", "VQ", "Berth"],
+  participants: ["Fef", "Romain", "Mathos", "Ben", "Fanny", "Eline", "Nathan", "Bastien", "VQ", "Berth"],
 };
 
 // Location de voiture : 3 voitures × ~300 € sur 5 jours + ~90 € de carburant/péages, divisé par 12 (estimation)
