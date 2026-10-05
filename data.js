@@ -9,8 +9,8 @@ const TRIP = {
   participants: ["Fef", "Romain", "Mathos", "Ben", "Fanny", "Eline", "Nathan", "Bastien", "VQ", "Berth"],
 };
 
-// Location de voiture : 3 voitures × ~300 € sur 5 jours + ~90 € de carburant/péages, divisé par 12 (estimation)
-const CAR_PER_PERSON = 83;
+// Location de voiture : 3 voitures × ~300 € sur 5 jours + ~90 € de carburant/péages, divisé par le nombre de participants (estimation)
+const CAR_PER_PERSON = (3 * 300 + 90) / TRIP.participants.length;
 
 const PLACES = [
   {
